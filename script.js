@@ -23,9 +23,9 @@
 //   3. The status message area (id="status")
 // --------------------------------------------
 
-const textBox = 
-const outputBox = 
-const statusBox = 
+const textBox = document.querySelector("#user-input");
+const outputBox = document.querySelector("#quiz-outputs");
+const statusBox = document.querySelector("#status");
 
 // This console.log helps us verify our selections worked correctly.
 // Open the browser's Developer Tools (F12) to see the output.
@@ -46,6 +46,9 @@ console.log(textBox, outputBox, statusBox);
 let score = 0;
 let pluto = false;
 
+// show initial score
+statusBox.innerHTML = score;
+
 // --------------------------------------------
 // STEP 3: CREATE THE ANSWER-CHECKING FUNCTION
 // --------------------------------------------
@@ -61,7 +64,7 @@ let pluto = false;
 
 const checkAnswer = () => {
   // Get the current value from the text input
-  
+  currentAnswer = textBox.value;
 
   // TODO: Create if/else if/else statements to check for each planet.
   // For each correct answer:
@@ -71,27 +74,43 @@ const checkAnswer = () => {
   //   - Display an error message in the statusBox
 
   if (currentAnswer === "Mercury") {
-
+    outputBox.innerHTML += "<h3>" + currentAnswer + " is the correct answer</h3>";
+    score += 1;
+    statusBox.innerHTML = score;
   } else if (currentAnswer === "Venus") {
-
+    outputBox.innerHTML += "<h3>" + currentAnswer + " is the correct answer</h3>";
+    score += 1;
+    statusBox.innerHTML = score;
   } else if (currentAnswer === "Earth") {
-
+    outputBox.innerHTML += "<h3>" + currentAnswer + " is the correct answer</h3>";
+    score += 1;
+    statusBox.innerHTML = score;
   } else if (currentAnswer === "Mars") {
-
+    outputBox.innerHTML += "<h3>" + currentAnswer + " is the correct answer</h3>";
+    score += 1;
+    statusBox.innerHTML = score;
   } else if (currentAnswer === "Jupiter") {
-
+    outputBox.innerHTML += "<h3>" + currentAnswer + " is the correct answer</h3>";
+    score += 1;
+    statusBox.innerHTML = score;
   } else if (currentAnswer === "Saturn") {
-
-  } else if (currentAnswer === "Uranus") {
-
+    outputBox.innerHTML += "<h3>" + currentAnswer + " is the correct answer</h3>";
+    score += 1;
+    statusBox.innerHTML = score;
   } else if (currentAnswer === "Neptune") {
-
+    outputBox.innerHTML += "<h3>" + currentAnswer + " is the correct answer</h3>";
+    score += 1;
+    statusBox.innerHTML = score;
   } else if (currentAnswer === "Pluto") {
     // Secret bonus answer - Pluto was reclassified as a dwarf planet in 2006
-  
+    outputBox.innerHTML += "<h3>" + currentAnswer + " is the correct answer</h3>";
+    score += 3;
+    statusBox.innerHTML = score;
+    pluto = true;
   } else {
     // If no conditions match, show an error message
-  
+    outputBox.innerHTML = currentAnswer + " is not an answer";
+    score -= 1;
   }
 
   // After checking the answer, verify if the game is complete
@@ -114,13 +133,13 @@ const checkAnswer = () => {
 // --------------------------------------------
 
 const checkScore = () => {
-  if (score === 8) {
-   
-  }
-  if (score === 8 && pluto) {
-    
-    // Disable the text box since the game is complete
-    
+  if (score >= 8) {
+    if (pluto) {
+      statusBox.innerHTML += "<h1>GG you win, but Pluto is a dwarf planet.</h1>";
+    } else {
+      statusBox.innerHTML += "<h1>GG you win</h1>";
+    }
+    textBox.disabled = true;
   }
 };
 
@@ -142,3 +161,4 @@ const checkScore = () => {
 //   - Calls the checkAnswer function when triggered
 // --------------------------------------------
 
+textBox.addEventListener("keydown", (event) => event.key === "Enter"? checkAnswer() : null)
